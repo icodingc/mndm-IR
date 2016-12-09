@@ -1,0 +1,338 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Image Search Demo</title>
+	
+	<!-- Google Fonts -->
+    <link href='{{ STATIC_URL }}css/googlefont.css' rel='stylesheet' type='text/css'>
+	<!-- Bootstrap -->
+	<link href="{{ STATIC_URL }}bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.fileupload.css">
+     <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.fileupload-ui.css">
+	<!-- front page -->
+	<link href="{{ STATIC_URL }}css/clarifi.css" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}img/pic/favicon2.png" media="screen" />
+	
+	
+</head>
+
+<body class="home">
+
+     <div class="wrap">
+     
+	 
+	 <div class="carousel">
+      <div class="carousel-inner">
+        <div class="item active nobg">
+          <div class="carousel-caption">
+            
+		    <h1 class="blog-title">
+		        <!-- add logo -->
+		    	<!-- <a href="#"><img src="{{ STATIC_URL }}img/pic/fashion-over2.jpg" height="100" width="300" ></a> -->
+		    	<!-- http://html-color-codes.info/chinese/ -->
+		    	<a herf="#" style="color:#428bca;;">DeepFashion</a>
+		    </h1>
+		    <h2 class="blog-desc">
+		    	<br\>
+		    	<br\>
+		    </h2>
+		    <div class="social">
+			    
+			    <a class="btn btn-outline btn-lg" href="#demo" style="color:#0080FF">Search</a>
+			    
+		    </div>
+	
+
+            </div>
+			
+        </div>
+      </div>
+    </div><!-- carousel used by head -->
+	
+	<div class="featurette subdesc">
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 ">
+        </div>
+      </div>	
+	</div>	
+	 
+    <div id="demo" class="featurette">
+       <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 ">
+
+        <h1 class="fashion-eye-title">
+        	<a herf="#" style="color:#428bca"><font face="Comic sans MS">Fashion Eye</font>
+        	</a>
+        </h1>
+        <!-- <p>上传服装图片，返回相似服装。</p> -->
+
+        </div>
+       </div>	  
+	  
+
+
+    <form id="fileupload" action="/feature/ajaxSearchAndTag" method="POST" enctype="multipart/form-data">
+	<div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10 col-lg-offset-4 col-md-offset-4
+		     col-sm-offset-4 col-xs-offset-4">
+            <div class="content-box big">
+              <div class="content-box-info fileupload-buttonbar">
+                <h3>上传一张图片</h3>
+                <span class="btn btn btn-primary fileinput-button">
+                   <!-- 选择图片 -->
+                   <img src="{{ STATIC_URL }}img/pic/submit.png" height="20" width="25"> SUBMIT
+
+                  <input type="file" id="upload-files" name="image" multiple="">
+				          <input id="reset" name="reset" type="reset" style="display:none;" /> 
+                  <label class="sr-only" for="upload-files">Image files</label>
+                  
+                </span>
+                <div>
+  		 
+                </div>
+              </div>
+            </div>
+          </div>
+	</div>
+    
+	<br>
+	<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div id="fileupload-progress" class="fileupload-progress fade">
+        <div class="progress progress-striped">
+          <div class="progress-bar progress-bar-primary active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+	<br>
+	<div class="fileupload-loading" hidden>
+		<img src="{{ STATIC_URL }}img/pluto29.gif"  alt="请等待" />
+	</div>
+	
+	<br>
+
+      </form>
+	 <!-- 添加展示图片 -->
+   <!-- <form id="file_name" action="#" method="POST"> -->
+    <div id="flip">随机图片</div>
+    <div class="photoItem">
+      <ul>
+        <li>
+          <input class="yifu" type="image" name="image_name" value="1_t.jpg" src="{{ STATIC_URL }}img/pic/1_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="2_t.jpg" src="{{ STATIC_URL }}img/pic/2_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="4_t.jpg" src="{{ STATIC_URL }}img/pic/4_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="5_t.jpg" src="{{ STATIC_URL }}img/pic/5_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="7_t.jpg" src="{{ STATIC_URL }}img/pic/7_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="12_t.jpg" src="{{ STATIC_URL }}img/pic/12_t.jpg">
+        </li>
+        <li>
+          <input class="yifu" type="image" name="image_name" value="13_t.jpg" src="{{ STATIC_URL }}img/pic/13_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="14_t.jpg" src="{{ STATIC_URL }}img/pic/14_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="15_t.jpg" src="{{ STATIC_URL }}img/pic/15_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="16_t.jpg" src="{{ STATIC_URL }}img/pic/16_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="18_t.jpg" src="{{ STATIC_URL }}img/pic/18_t.jpg">
+          <input class="yifu" type="image" name="image_name" value="19_t.jpg" src="{{ STATIC_URL }}img/pic/19_t.jpg">
+          <!-- <img style="-webkit-user-select: none" src="{{ STATIC_URL }}img/pic/19_t.jpg" width="157px" height="157px"> -->
+        </li>
+      </ul>
+    </div>
+    <!-- </form> -->
+    <!-- 图片添加完毕 --> 
+	
+	  
+    </div>
+	
+	<div id='demo_dsp'>
+			
+	</div>
+	
+   </div><!-- demo -->
+	 
+	</div><!-- wrap -->
+	
+	
+
+
+
+
+ <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+<script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ STATIC_URL }}bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+
+<script src="{{ STATIC_URL }}js/masonry.pkgd.min.js"></script>
+<script src="{{ STATIC_URL }}js/imagesloaded.pkgd.js"></script>
+
+
+<!-- jquery-fileupload and dependencies. -->
+<script src="{{ STATIC_URL }}js/fileupload/jquery.ui.widget.js"></script>
+<script src="{{ STATIC_URL }}js/fileupload/load-image.all.min.js"></script>
+<script src="{{ STATIC_URL }}js/fileupload/canvas-to-blob.min.js"></script>
+<script src="{{ STATIC_URL }}js/fileupload/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="{{ STATIC_URL }}js/fileupload/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="{{ STATIC_URL }}js/fileupload/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="{{ STATIC_URL }}js/fileupload/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="{{ STATIC_URL }}js/fileupload/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="{{ STATIC_URL }}js/fileupload/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="{{ STATIC_URL }}js/fileupload/jquery.fileupload-validate.js"></script>
+
+<script type="text/javascript">	
+$("#flip").click(function(){
+  $(".photoItem").slideToggle("slow");
+});
+</script>
+<script type="text/javascript"> 
+$(".yifu").on("click", function(){
+    var name = $(this).attr("value");
+    // console.log(name);
+    $.get("/search_img/",
+      {
+        image_name:name
+      },
+    function(data,status){
+      console.log(data);
+      $('#demo_dsp').html(data+$('#demo_dsp').html());     
+      $(document.body).animate({
+        'scrollTop': $('#demo_dsp').offset().top
+      }, 1000);
+      //alert('status: ' + statusText + 'ok');
+      $('#imgcontainer').each(function () {
+        var $container = $(this);
+        // layout Masonry again after all images have loaded
+        $container.imagesLoaded(function () {
+
+          // console.log($container);
+          $container.masonry({
+            // options
+            columnWidth: 10,
+            itemSelector: '.item'
+          });
+        });
+      });
+    }
+  );
+});
+	function uploadDone(e, data) {
+		
+		console.log(data.result);
+		$('.fileupload-loading').hide();
+		
+		$('#demo_dsp').html(data.result+$('#demo_dsp').html());			
+		
+		$(document.body).animate({
+				'scrollTop': $('#demo_dsp').offset().top
+			}, 1000);
+		//alert('status: ' + statusText + 'ok');
+		$('#imgcontainer').each(function () {
+			var $container = $(this);
+			// layout Masonry again after all images have loaded
+			$container.imagesLoaded(function () {
+
+				// console.log($container);
+				$container.masonry({
+					// options
+					columnWidth: 10,
+					itemSelector: '.item'
+				});
+			});
+		});
+		
+		$('#imgcontainer2').each(function () {
+			var $container = $(this);
+			// layout Masonry again after all images have loaded
+			$container.imagesLoaded(function () {
+
+				// console.log($container);
+				$container.masonry({
+					// options
+					columnWidth: 12,
+					itemSelector: '.item'
+				});
+			});
+		});
+	}
+   
+   function  uploadFail(e, data) {
+    // data.errorThrown
+    // data.textStatus;
+    // data.jqXHR;
+	 $('.fileupload-loading').hide();
+     alert(data.errorThrown);
+   }
+
+$('#upload-files').fileupload({
+		url:'/search_img',
+        previewMaxWidth: 100,
+        autoUpload: true,
+        sequentialUploads: true,
+	// limitConcurrentUploads: 1,
+        acceptFileTypes: /(\.|\/)(png|gif|jpe?g)$/i,
+        prependFiles: true,
+        processQueue: [
+          {
+            action: 'validate',
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+          },
+          {
+            action: 'loadImageMetaData'
+          },
+          {
+            action: 'loadImage',
+            fileTypes: /^image\/(gif|jpeg|png)$/,
+            maxFileSize: 20000000 // 20MB
+          },
+          {
+            action: 'resizeImage',
+            prefix: 'image',
+            maxWidth: 256,
+            minWidth: 256,
+            orientation: true,
+            canvas: true
+          },
+          {
+            action: 'saveImage'
+          },
+          {
+            action: 'setImage'
+          },
+          {
+            action: 'loadVideo'
+          },
+          {
+            action: 'setVideo'
+          }
+        ],
+		done:uploadDone,
+		fail:uploadFail,
+		start:	function (e, data) {
+			console.log('start');
+			$('.fileupload-loading').show();
+				
+				$(document.body).animate({
+					'scrollTop': $('.fileupload-loading').offset().top
+				}, 500);
+		}
+    });
+	
+
+</script>
+
+ </body>
+</html>

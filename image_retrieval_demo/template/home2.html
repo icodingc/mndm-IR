@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图像检索Demo</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap-3.3.5-dist/css/bootstrap.min.css">
+
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap-3.3.5-dist/css/bootstrap-theme.min.css">
+
+
+</head>
+<body>
+<div class="container">
+
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<form  action="/search_img"  method="post" enctype="multipart/form-data">				
+				{% csrf_token %}
+				<fieldset>
+					<legend>图像检索</legend>
+					<input type="file" name="image" accept="image/*">
+					<span class="help-block" ></span>
+					<button class="btn" type="submit">检索</button>
+				</fieldset>
+			</form>
+		</div>
+		
+	</div>
+	
+
+
+</div>
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="{{ STATIC_URL }}jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="{{ STATIC_URL }}bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+
+<script  type="text/javascript">
+
+</script>
+
+</body> 
+</html>
