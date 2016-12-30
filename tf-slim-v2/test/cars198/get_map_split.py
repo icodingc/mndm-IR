@@ -1,0 +1,62 @@
+from annoy import AnnoyIndex
+import numpy as np
+import sys
+from sklearn.preprocessing import normalize
+
+def get_names2feat(name_file,feat_file):
+    names = np.load(name_file)
+    feature = normalize(np.load(feat_file))
+    rst = {}
+    for i,a in enumerate(names):
+        rst[a.strip()]=np.squeeze(feature[i])
+    return rst
+
+base_dir = './'
+query_name2feat = get_names2feat(base_dir+'test_filename.npy',base_dir+'test_feature_ap.npy')
+name2feat = get_names2feat(base_dir+'train_filename.npy',base_dir+'train_feature_ap.npy')
+name2feat.update(query_name2feat)
+
+names = name2feat.keys()
+print 'all key',len(set(names))
+feats = [name2feat[b] for b in names]
+
+f = 512
+t = AnnoyIndex(f)
+for i,a in enumerate(feats):
+    t.add_item(i,a)
+t.build(200)
+#t.save('cars.ann')
+
+with open('name_and_label.lst','r') as f:
+    name_and_label = f.readlines()
+names_ = []
+labels_ = []
+for kk in name_and_label:
+    cnt = kk.split('\t')
+    names_.append(cnt[0])
+    labels_.append(cnt[1])
+name2set = dict(zip(names_,labels_))
+with open('query.lst','r') as f:
+    querys = f.readlines()
+querys = [q.strip() for q in querys]
+
+def solve(pic,rst_names):
+    fg = name2set[pic]
+    for rn in rst_names:
+        cfg = name2set[rn]
+        if fg==cfg:
+            return True
+    return False
+# get map
+# query num = 14218
+def get_ap(k=16):
+    cnt=0
+    for i,pic in enumerate(querys):
+        cur_feat = name2feat[pic]
+        rst_idx = t.get_nns_by_vector(cur_feat,n=k+1)[1:]
+        rst_names = [names[idx] for idx in rst_idx]
+        if solve(pic,rst_names):
+            cnt+=1
+    print('k=%d,map:'% k,cnt/(8131.0))
+get_ap(16)
+get_ap(32)
