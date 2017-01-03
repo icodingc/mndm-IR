@@ -1,6 +1,8 @@
+# r1.1
+- 增加一些帮助代码，以及ipynb
+
 # r0.12
 - 用于保存以前的东西，固定checkpoint一下 
-- 增加一些帮助代码，以及ipynb
 
 # tf-slim-v2
 - cars 数据集
