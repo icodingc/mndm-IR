@@ -1,20 +1,22 @@
-MNDM for Image Retrieval
+Multi-Negative Deep Metric for Image Retrieval
 =============================
-数据集基于DeepFashion的inshop & consumer-to-shop. <br>下边给几个在这两个检索集上的例子。
 
-- ![consumer2shop](https://raw.githubusercontent.com/icodingc/mndm-IR/master/consumer-example.png)
-- ![inshop](https://raw.githubusercontent.com/icodingc/mndm-IR/master/inshop-example.png)
+This repository has the source code for the paper "Multi-Negative Deep Metric for Image Retrieval". For the loss layer implementation, look at [here](https://github.com/icodingc/mndm-IR/blob/master/tf-slim-v2/ops/triplet_ops.py#L40). Networks can be found [here](https://github.com/icodingc/mndm-IR/blob/master/tf-slim-v2/nets/vgg.py#L135).
 
-*具体细节以后再补充。*
+Example retrieval results on [DeepFashion](http://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html) dataset. <br>
+![Consumer-to-Shop](./consumer-example.png)
 
-# r0.12
-- 用于保存以前的东西，固定checkpoint一下 
-- 增加一些帮助代码，以及ipynb
+## Prerequisites
+1. Tensorflow r0.9
+2. Download DeepFashion & CARS196 datasets.
+3. Download pretrained VGG16 model from [here](http://download.tensorflow.org/models/vgg_16_2016_08_28.tar.gz).
 
-# r0.11
-- cars 数据集
-- 增加batch_dssm 的训练方式，更有效的利用整个batch 的样本
+## Training Procedure
+- Ap cluster & generate negative sampling.
+- run training scrips
 
-# fixed bug
-- batch_norm 阶段设置问题,抽feature时候is_training=False
-- fine-tune 问题,把tf.trainable_variable()改为tf.all_variable()
+## Feature extraction for Test
+- extract feature
+- run test scrips
+
+#### *More details in the future. :)*
