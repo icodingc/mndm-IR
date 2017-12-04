@@ -106,7 +106,7 @@ def _dssm_loss_batch(features,gamma,scope=None):
             pos_m = pos_mat[i][j]
             negs_m = neg_mat[i][j]
             numerator = tf.exp(pos_m)
-            denominator = tf.reduce_sum(numerator+tf.exp(negs_m))-tf.exp(negs_m[j])
+            denominator = numerator+tf.reduce_sum(tf.exp(negs_m))-tf.exp(negs_m[j])
             all_loss.append(-tf.log(numerator/denominator))
     print('example',len(all_loss))
     rst_loss = tf.reduce_mean(all_loss)
